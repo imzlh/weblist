@@ -1,0 +1,23 @@
+#!/usr/bin/make -f
+
+SHELL=sh -e
+
+export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+# DPKG_EXPORT_BUILDFLAGS = 1
+# include /usr/share/dpkg/buildflags.mk
+
+export DH_VERBOSE=1
+
+%:
+	dh $@ --with python3
+
+override_dh_installinit:
+	dh_installinit -pweborf-daemon --onlyscripts --init-script=weborf
+
+override_dh_auto_install:
+	make -C qweborf install DESTDIR=../debian/qweborf
+	dh_auto_install
+
+override_dh_auto_clean:
+	make -C qweborf clean
+	dh_auto_clean

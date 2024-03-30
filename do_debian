@@ -1,0 +1,29 @@
+#!/bin/sh
+mkdir -p deb-pkg
+rm -rf deb-pkg/*
+
+autoreconf -f -i
+./configure
+make -j
+
+PRJDIR=$(pwd)
+TMPDIR=/tmp/
+VERSION=$(./weborf --version | head -n 1 | cut -d\  -f2)
+
+
+
+rm -rf $TMPDIR/weborf*
+make clean
+./configure
+make -j dist
+mv weborf-$VERSION.tar.gz $TMPDIR/weborf_$VERSION.orig.tar.gz
+gpg --sign --armor --detach-sign $TMPDIR/weborf_$VERSION.orig.tar.gz
+cd $TMPDIR
+tar -xvvf weborf_$VERSION.orig.tar.gz
+cd weborf-$VERSION
+cp -r $PRJDIR/debian .
+dpkg-buildpackage --changes-option=-S
+cd ..
+mv /tmp/weborf*.* /tmp/qweborf* "$PRJDIR"/deb-pkg
+cd "$PRJDIR"
+lintian --pedantic -E --color auto -i -I deb-pkg/*changes deb-pkg/*deb

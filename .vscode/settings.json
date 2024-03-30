@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.in": "c",
+        "options.h": "c"
+    }
+}

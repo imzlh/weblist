@@ -1,0 +1,11 @@
+#!/bin/bash
+. testsuite/functions.sh
+
+run_weborf -b site1 -p 12347 --mime
+
+function cleanup () {
+    kill -9 $WEBORF_PID
+}
+trap cleanup EXIT
+
+curl -v http://127.0.0.1:12347/robots.txt |& grep Content-Type | grep text/

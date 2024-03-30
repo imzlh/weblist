@@ -1,0 +1,42 @@
+Source: weborf
+Section: httpd
+Priority: optional
+Maintainer: Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>
+Build-Depends: debhelper-compat (= 13), debhelper (>= 13), libmagic-dev, python3, dh-python, pyqt5-dev-tools,
+ python3-setuptools, libssl-dev, curl
+Standards-Version: 4.6.2
+Rules-Requires-Root: no
+Homepage: https://ltworf.github.io/weborf/
+
+Package: weborf
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: php-cgi
+Description: Fast and small webserver meant to be run without root privileges
+ Weborf is a configurationless webserver mainly meant to allow users to
+ easily share their directories over the web.
+ Has limited support to webdav, allowing its use by GNOME and KDE filemanagers.
+ It also supports cgi.
+
+Package: weborf-daemon
+Architecture: all
+Pre-Depends: ${misc:Pre-Depends}
+Depends: ${misc:Depends}, weborf (>=${binary:Version})
+Description: init script for weborf
+ Weborf is a configurationless webserver mainly meant to allow users to
+ easily share their directories over the web.
+ Has limited support to webdav, allowing its use by GNOME and KDE filemanagers.
+ It also supports cgi.
+ .
+ This package provides a SystemV daemon to start weborf using init.
+
+Package: qweborf
+Architecture: all
+Depends: ${misc:Depends}, ${python3:Depends}, weborf (>=${binary:Version}), python3-pyqt5
+Recommends: miniupnpc
+Description: Shares files using the HTTP protocol
+ Qweborf provides an easy to use graphical interface to share local files using
+ the HTTP protocol.
+ It can enable writing on the server, webdav, authentication and sending
+ directories as tar.gz.
+ It can try to work across NAT.

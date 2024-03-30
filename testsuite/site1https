@@ -1,0 +1,8 @@
+#!/bin/bash
+. testsuite/functions.sh
+
+run_weborf -b site1 -p 12346  --cert cert/certificate.pem --key cert/key.pem
+
+ROBOTS=$(curl -s -k https://127.0.0.1:12346/robots.txt)
+
+[[ "$ROBOTS" = $(cat site1/robots.txt) ]]

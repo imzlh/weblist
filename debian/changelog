@@ -1,0 +1,277 @@
+weborf (1.0-1) unstable; urgency=high
+
+  * New upstream release, fixing CVE-2023-46586
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Thu, 12 Oct 2023 00:12:44 +0200
+
+weborf (0.20-1) unstable; urgency=low
+
+  * New upstream release
+  * Remove X-Python3-Version: >= 3.6 from control file
+  * Added metadata file
+  * Use setuptools since python intelligently dropped distutil
+  * Bump Standards-Version: 4.6.2
+  * Remove dependency on outdated lsb-base for weborf-daemon
+  * Clean python egg to allow rebuild in place
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Wed, 04 Oct 2023 18:37:46 +0200
+
+weborf (0.19-2.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * No source change upload to rebuild with debhelper 13.10.
+
+ -- Michael Biebl <biebl@debian.org>  Sat, 15 Oct 2022 12:57:06 +0200
+
+weborf (0.19-2) unstable; urgency=high
+
+  * Install weborf in autopkgtest, to test weborf
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Tue, 15 Mar 2022 09:08:11 +0100
+
+weborf (0.19-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add autopkgtest suite.
+    Calls the regular test suite but using the system
+    installed version.
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Mon, 14 Mar 2022 23:36:58 +0100
+
+weborf (0.18-1) unstable; urgency=low
+
+  * New upstream release
+  * Bump Standards-Version: 4.6.0.1
+  * Bump compat to 13
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 06 Mar 2022 13:31:12 +0100
+
+weborf (0.17-4) unstable; urgency=low
+
+  * Fix d/watch
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Fri, 29 Oct 2021 17:01:04 +0200
+
+weborf (0.17-3) unstable; urgency=medium
+
+  * Disable most of the test suite (flaky on debian builders)
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Thu, 31 Dec 2020 15:13:19 +0100
+
+weborf (0.17-2) unstable; urgency=medium
+
+  * Added sleep to test that flaked on s390
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Thu, 31 Dec 2020 12:55:04 +0100
+
+weborf (0.17-1) unstable; urgency=low
+
+  * build-depend on curl to run new test suite
+  * New upstream release (LP: #1875194)
+  * Fix debian/watch
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Tue, 29 Dec 2020 19:41:28 +0100
+
+weborf (0.16-1) unstable; urgency=medium
+
+  * New upstream release
+  * Bump compat to 12
+  * Remove compat file
+  * Pre-Depends in weborf-daemon
+  * Rules-Requires-Root: no
+  * Bump Standards-Version to 4.4.1
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 10 Nov 2019 13:49:18 +0100
+
+weborf (0.15-1) unstable; urgency=medium
+
+  * New upstream release
+  * Add libssl-dev to build depends to enable https
+  * Add lintian override for possible-gpl-code-linked-with-openssl, since
+    exception is provided in the license.
+  * Bump python-version-field to 3.6
+  * Bump Standards-Version to 4.2.1
+  * Removed joke from qweborf (Closes: #892208)
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 09 Dec 2018 06:26:46 +0100
+
+weborf (0.14-2) unstable; urgency=high
+
+  * Build-Depend on python3-distutils (Closes: #896795)
+  * Fix typo in description
+  * Remove trailing spaces in changelog and rules
+  * Updated debian/copyright file
+  * Bump compat from 9 to 11
+  * Bump Standards-Version to 4.1.4
+  * Clean the python install directory
+  * Clean generated GUI python file
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Tue, 24 Apr 2018 22:12:59 +0200
+
+weborf (0.14-1) unstable; urgency=low
+
+  * New upstream release
+  * Suggest php-cgi instead of the non existing php5-cgi
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Tue, 19 Dec 2017 00:30:14 +0100
+
+weborf (0.13.5-1) unstable; urgency=low
+
+  * New upstream release (Closes: #868181, #868182)
+  * Remove patches from 0.13.4-2
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sat, 11 Feb 2017 12:14:51 +0100
+
+weborf (0.13.4-3) unstable; urgency=low
+
+  * Make weborf-daemon depend on lsb-base
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Thu, 03 Nov 2016 22:50:29 +0100
+
+weborf (0.13.4-2) unstable; urgency=low
+
+  * Fix segmentation fault when opening extremely large directories
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 25 Sep 2016 17:04:34 +0200
+
+weborf (0.13.4-1) unstable; urgency=low
+
+  * New upstream release
+  * Bumped Standards-Version to 3.9.8
+  * Removed decorator patch, now upstream
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Mon, 05 Sep 2016 21:46:49 +0200
+
+weborf (0.13.3-2) unstable; urgency=medium
+
+  * Remove decorators to workaround a bug in PyQt
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Mon, 29 Aug 2016 22:53:03 +0200
+
+weborf (0.13.3-1) unstable; urgency=low
+
+  * New upstream release
+  * Bumped Standards-Version to 3.9.7
+  * Added upstream's public key for verification
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Wed, 16 Mar 2016 13:45:15 +0100
+
+weborf (0.13.2-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Tue, 09 Feb 2016 16:13:52 +0100
+
+weborf (0.13.1-2) unstable; urgency=medium
+
+  * Don't hard-code the python version. (Closes: #802857)
+  * Remove version from depends in stable
+  * Copyright file in dep 5 (Closes: #802489)
+  * Use all hardening flags
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sun, 25 Oct 2015 13:36:21 +0100
+
+weborf (0.13.1-1) unstable; urgency=low
+
+  * New upstream release
+  * Recommends miniupnpc for NAT traversal
+  * Typo fixed upstream (Closes: #773655)
+  * Removed patch "miredo" (Now upstream)
+  * Removed patch "mapped_addr" (Now upstream)
+  * qweborf now uses Python3 and PyQt5
+  * Drop python-support (Closes: #786147)
+  * Bumped Standards-Version to 3.9.6
+  * Bumped debhelper to 9
+  * Change links to new upstream website
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Thu, 15 Oct 2015 08:43:41 +0200
+
+weborf (0.13-3) unstable; urgency=low
+
+  * Fixed typo in the description (Closes: #677083)
+  * Correctly handles IPv4 clients in log files when started by
+    xinetd (Closes: #601253)
+  * Updated Standards-Version
+  * Build-depends on hardening-wrapper
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Thu, 21 Jun 2012 17:35:43 +0200
+
+weborf (0.13-2) unstable; urgency=low
+
+  * Backport fix from upstream: qweborf doesn't crash when miredo is in use
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Mon, 19 Dec 2011 10:54:07 +0100
+
+weborf (0.13-1) unstable; urgency=low
+
+  * New upstream release
+  * Adds qweborf package, GUI for sharing files with HTTP
+  * Uses GNU autotools (Closes: #611528)
+  * Adds libmagic-dev in build-deps
+  * Added more examples
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sat, 26 Mar 2011 14:44:31 +0100
+
+weborf (0.12.5-1) unstable; urgency=high
+
+  * New upstream release
+  * Fixes DoS
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Fri, 28 Jan 2011 11:18:01 +0100
+
+weborf (0.12.4-1) unstable; urgency=high
+
+  * New upstream release
+  * Fixes DoS (Closes: #601585)
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Wed, 27 Oct 2010 16:01:35 +0200
+
+weborf (0.12.3-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixes directory traversal (Closes: #596112)
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Wed, 08 Sep 2010 22:24:21 +0200
+
+weborf (0.12.2-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Tue, 22 Jun 2010 16:33:22 +0200
+
+weborf (0.12.1-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Thu, 03 Jun 2010 23:48:40 +0200
+
+weborf (0.12-2) unstable; urgency=low
+
+  * Using quilt
+  * Fixed error in Makefile that prevented building
+  * Fixed date error in debian changelog
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sat, 29 May 2010 18:30:22 +0200
+
+weborf (0.12-1) unstable; urgency=low
+
+  * Corrected spelling mistake in manpage (Closes: #549652)
+  * Builds weborf-daemon package
+  * New upstream release
+  * Added explicit format 1.0
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Thu, 27 May 2010 22:10:22 +0200
+
+weborf (0.11-2) unstable; urgency=low
+
+  * Corrected name of upstream author Salvo Rinaldi in the copyright file.
+  * Added name of upstream author Salvo Rinaldi in the manpages.
+  * Edited description of the package
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Sat, 26 Sep 2009 18:46:22 +0200
+
+weborf (0.11-1) unstable; urgency=low
+
+  * Initial release (Closes: #506771)
+
+ -- Salvo 'LtWorf' Tomaselli <tiposchi@tiscali.it>  Tue, 22 Sep 2009 15:13:55 +0200

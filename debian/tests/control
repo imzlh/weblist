@@ -1,0 +1,43 @@
+Test-Command: testsuite/version_and_help
+Restrictions: allow-stderr superficial
+Depends: weborf
+
+Test-Command: testsuite/site1http
+Restrictions: allow-stderr
+Depends: curl, weborf
+
+Test-Command: testsuite/site1https
+Restrictions: allow-stderr
+Depends: curl, weborf
+
+Test-Command: testsuite/ip_listener
+Restrictions: allow-stderr
+Depends: curl, weborf
+
+Test-Command: testsuite/vhost
+Restrictions: allow-stderr
+Depends: curl, weborf
+
+Test-Command: testsuite/etag
+Restrictions: allow-stderr
+Depends: curl, weborf
+
+Test-Command: testsuite/index_file
+Restrictions: allow-stderr
+Depends: curl, weborf
+
+Test-Command: testsuite/range
+Restrictions: allow-stderr
+Depends: curl, weborf
+
+Test-Command: testsuite/cgi
+Restrictions: allow-stderr
+Depends: curl, weborf
+
+Test-Command: testsuite/cachedir
+Restrictions: allow-stderr rw-build-tree
+Depends: curl, weborf
+
+Test-Command: testsuite/site1mimetype
+Restrictions: allow-stderr
+Depends: curl, weborf

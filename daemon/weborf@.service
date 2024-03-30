@@ -1,0 +1,30 @@
+[Install]
+WantedBy=multi-user.target
+
+[Unit]
+Description=Weborf webserver with %I
+AssertPathExists=/etc/weborf.d/%i
+PartOf=weborf.service
+ReloadPropagatedFrom=weborf.service
+Before=weborf.service
+Documentation=man:weborf.conf(5)
+
+[Service]
+PrivateTmp=true
+User=root
+Type=forking
+Restart=always
+ExecStart=/usr/share/weborf/weborf_launcher /etc/weborf.d/%i -d
+StandardOutput=null
+StandardError=null
+SyslogIdentifier=weborf-%i
+
+# Some security tuning
+NoNewPrivileges=yes
+SystemCallArchitectures=native
+PrivateDevices=yes
+PrivateTmp=yes
+ProtectHome=read-only
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true

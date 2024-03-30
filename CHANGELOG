@@ -1,0 +1,280 @@
+1.0
+- I declare weborf is now stable!
+- Fix a security bug where the path for CGI scripts was not null-terminated in certain configurations (CVE-2023-46586)
+
+0.20
+- restyle qweborf to fit on a mobile screen
+- ignore Content-Type header in PUT requests, instead of failing
+
+0.19
+- qweborf can store the default settings
+
+0.18
+- Wait for weborf to create socket in testsuite
+- Add an icon for qweborf (copied from Oxygen)
+- Appstream metainfo file for qweborf
+
+0.17
+- Fix MOVE and COPY methods to support relative URI
+- Fix parsing issues in the daemon startup script
+- Test suite added
+- Add github workflows to run tests
+- Improve compatibility with range requests
+- Set conent length for redirection responses
+- Partially fix deadlock possibility while running a CGI page
+- Pass CGI filename as parameter
+- Fix error where responses with size 0 would cause timeouts
+
+0.16
+- qweborf has a normal makefile
+- Authentication example comes with a systemd file
+- CGI wrappers eliminated
+- CGI disabled by default
+- Default basedir to /srv/www
+- Bug: webdav reported wrong file size on certain architectures
+
+0.15
+- Finally support https
+- Support systemd. It's now easy to run several weborf instances.
+- Can set certificate with qweborf
+- Various bugfixes
+
+0.14
+- Use one less thread
+- Use smaller thread pool
+- Detaches when connections can be accepted (can now use Type=forking in systemd)
+- Log some cases of bad request
+- Bug: fixes issue with authentication request causing further requests on the same connection to fail
+- Reduced memory footprint for webdav requests
+- Bug: memory corruption error, only triggered with some gcc flags
+
+0.13.5
+- Added --gid option to change gid
+- Improved handling of reserved characters in URI
+- ContentType in directory listing
+- Improved code to create the socket
+
+0.13.4
+- Workaround API breaking in PyQt
+- Improvements in directory listing
+- Convert things to string before showing them in qweborf
+
+0.13.3
+- Better desktop integration for qweborf
+
+0.13.2
+- Fix base64 decoding bug
+
+0.13.1
+- Port qweborf to Python3 and Qt5
+
+0.13
+- Shows last modified column in directory listing (Rev 419)
+- Webdav module can send mimetype
+- Bug: fixes denial of service in case of malformed header range (Rev 429)
+- Bug: ported fix from 0.12.2
+- Faster listing of directories with several hidden files
+- PROPFIND now gives %-escaped URIs (Rev 444)
+- Improved handling of Connection header in responses
+- Sends reason phrase in HTTP response
+- Directory listing can be cached on disk
+- Can support large files
+- Added GiB measure in directory listing
+- Ported fix from 0.12.3 (Rev. 465)
+- Reduced number of params for functions
+- Uses pthread calls for TLS instead of relying on __thread that doesn't work on OsX
+- Dav's PROPFIND with different required properties can be cached on disk
+- Can send Content-Type
+- Can be used with inetd/xinetd
+- Fixes crash on invalid request (Rev 492)
+- Will no longer terminate on failed accept
+- Heavy code refactory
+- Webdav method MOVE is now faster on directories
+- Support for embedded authentication policy
+- Support for If-Range header (Rev 516)
+- Migrated to GNU autotools
+- Now logs HTTP status code for each request
+- Ships qweborf: QT GUI for simple file sharing
+- Truncates files on PUT
+- Can send directories as tar.gz files
+
+0.12.5
+- Fixes DoS occurring with malformed fields in HTTP request
+
+0.12.4
+- Fixes DoS occurring on malformed HTTP request, backported from trunk
+
+0.12.3
+- Fixes directory traversal vulnerability
+
+0.12.2
+- Fixes DoS occurring when wide chars are used in some headers
+
+0.12.1
+- Fixes DoS occurring on malformed Range header, backported from trunk
+
+0.12
+- Fixed bug: now threads are closed again (Rev 305)
+- Using keep-alive with CGI only in case of small pages (Rev 306)
+- Reduced maximum size of generated pages (Rev 307)
+- Adjusted size of the buffers (Rev 307)
+- ETag headers are now sent only if the resource is static (Rev 308)
+- "Moved permanently" code is returned instead of "see other" when client requests directory without ending / (Rev 209)
+- Added wrapper for CGI python, which replaces the previous one (Rev 312)
+- Support for custom CGI formats
+- LSB tags added to the init script (Rev 323)
+- Support to PUT,DELETE,OPTIONS methods
+- Fixed bug: some file descriptors caused thread's termination (Rev 341)
+- Added wrapper for executables CGIs
+- Stub for webdav
+- Implemented MKCOL, COPY, MOVE methods
+- Bug: socket were closed randomly on non GET/POST methods
+- Bug: tamed buffers do not affect subsequent connections on the same thread
+- Daemon is able to start authentication server too, reading about it from weborf.conf (Rev 359)
+- Better and more resistant xml parsing of PROPFIND requests (Rev 363)
+- Bug: addresses are properly converted into strings (Rev 373)
+- CGI does chdir into script's directory (Rev 374)
+- Enables logging
+- Uses reentrant version of readdir (Rev 381)
+- Added more controls on memory allocation
+- Bug: buffer size corrected in queue.c
+- Logs insufficient memory
+- Can compile on OpenSolaris (manual edit of Makefile is needed)
+- Edited instance.h to workarond OpenSolaris bug #6775831
+- Can use SIGUSR1 to print internal status on stdout
+- Edited daemon script to pass the new lintian's test
+- Attempt to resolve race-condition by refactoring
+- Changed astyle parameters to use the new version
+- Sorts content of directories when generating html index
+- Bug: replaced unsafe sprintf with snprintf (Rev 415)
+
+0.11
+- Support for ETag header
+- Support for If-None-Match header. Weborf will not re-send files that are cached into the browser
+- Cleaned up some send_header functions
+- Fixed bug: malformed range header was able to cause segfault (Rev 251)
+- Support for Last-Modified header (Rev 252)
+- Introduced optimizations in parsing request and sending an header
+- Code refactory to reduce amount of passed parameters
+- Will now send connection header if an old client is using keep-alive
+- Corrected sending post data to cgi-bin
+- Fixed REQUEST_URI header which was broken some revisions ago
+- Doesn't send CGI errors and warning to the client anymore
+- Shows CGI errors on standard error, but an option in options.h can hide them
+- Optimizations in CGI
+- Reduced system calls number
+- Reduced number of strlen and strstr
+- Fixed warnings in manpages
+
+0.10
+- Pipe with scripts are now closed
+- Support for cgi-php
+- Fixed some possibilities of buffer overflow
+- Enlarged default head's buffer, necessary for script generated headers
+- When the script is terminated for timeout, error 500 is sent to the client
+- Fixed error in cgi wrapper that didn't allow to use \r\n\r\n sequence in output
+- Compile on MacOsX without needing to edit the code
+- Embedded support for cgi
+- Support for list of index files
+- List of index files changable in weborf.conf
+- Refactory of code to send/execute pages and generate dir listing
+- Changed default optimizations
+- Support for virtualhost
+- Support for virtualhost in weborf.conf
+- Support for gzip encoding, when supported by client
+- Support for enabling/disabling cgi from weborf.conf
+- Heavy optimization in finding the end of the header
+- Added a buffered reader to reduce the overall amount of read syscalls
+- Replaced deprecated inet_ntoa with its replacement inet_ntop
+- POST can read binary data, with 0 bytes in the stream
+- Correct passing POST data to script. It brokes php since it has a bug, reported as #47825
+- Added support to timeout
+- Addresses are converted in strings in threads instead of main thread.
+- Added manpage for weborf.conf
+- Queue does less operations on memory (rev 231)
+- Changed authentication from child process to unix socket (rev 232)
+- Partial (but enough) support for range headers (rev 235)
+- Solved problem which caused 100% cpu usage (Salvo Rinaldi)
+- Solved problem which caused partial resending of files
+- Removed redoundant conditions to free memory (Angelo Puglisi)
+
+0.9
+- Bug: fixed size hadling of NBUFFER
+- Reduced standard size of NBUFFER
+- Make install installs weborf as a daemon executable by init
+- Switch to compile using ipv4 or ipv6
+- Memory leak fixed
+- Bug: can now handle firefox's post requests
+- Bug: no more segmentation fault on post requests issued by squid
+- Handles pipelined and not-pipelined requests
+- Timeout for scripts (not auth scripts)
+- Bug: buffer for requests is now reset after every request
+- Increased speed for identify request
+- Bug: unsigned value used when signed was needed
+- Bug: parameters within HTTP requests are now read correctly
+- Changed buffer allocation for string IP addresses in IPv4 mode
+- Possibility to use scripts as normal files
+- Exit codes now have a meaning (documented in manpage)
+
+0.8
+- Improved file listing
+- Added support for large files
+- Bug: Now authentication works even with spaces within file or directory's names
+- Prepared handling for content-length
+- Bug: POST works again
+- Maximum size for POST requests
+
+
+0.7
+- Escape sequences in POST requests are now correctly handled
+- Daemon mode added
+- Memory leak removed
+- Support for Basic authentication
+- Parsing program arguments with getopt
+- IPv6 support
+- Improved file listing
+- Changed thread policy: Now the MAXTHREAD number can be reached, because the last group of threads can be smaller
+- Some small changes to make it faster
+- Improved handling several requests on the same connection. It SHOULD work better now.
+
+0.6
+- Added comments
+- Improved speed on string operations
+- Memory leak corrected in script execution and page sending
+- Added control on non http messages
+- Reduced the use of mutex during thread creation
+- Improved signal handling
+- Reduced malloc's total number, this will increase speed
+- Uses printf's return value instead of strlen()
+- Corrected directory listing. Now doesn't show link to parent if already in parent directory.
+- Directory listing doesn't show link to self anymore.
+- Cleaned up logging. It will hide many informations by default
+- Now threads are aware of client's IP address
+
+0.5
+- Bug: active thread's counter was not reduced on thread's termination
+- Logs dropped connections due to not enough threads
+- Handles escape's sequences in url
+- Fixed a warning occurred in amd64 architecture
+- Improved list's generation for directories without index
+- Bug: directories without the ending / are now listed correctly
+- Added stub (not working) for authentication request
+- HTTP's request parameters are passed as enviromentals vars to the scripts
+- Added experimental support to POST method, and use of enviromental vars
+
+0.4
+- Bug: Relative paths can't be used, so the client can't go outside the basedir
+- Support for files with spaces in the name
+- Bug: Added checks on memory allocation failures, and in this case send an error to the client
+- Changed error's sending system
+- Threads are detached
+- Added a thread to monitor how many free threads there are, to stop some if there are too much
+- manpage added
+- Added make install, to copy the binary in /usr/local/bin and install manpage
+- It is possible to start weborf as root to use a low port number and then change the user
+
+0.3
+- Only a few threads are created when started. More are started when there are too few free ones
+- Index page is loaded automatically, even when not specified in the URL
+- When index file is missing, a list of file is dinamically generated, showing all regular files and directories (FIFO, devices and sockets aren't shown)
+- Handles command line parameters

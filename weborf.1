@@ -1,0 +1,183 @@
+.TH Weborf 1 "May 05, 2023" "Minimal webserver"
+.SH NAME
+weborf
+\- Minimal webserver
+
+.SH SYNOPSIS
+weborf [options]
+
+.SH DESCRIPTION
+Weborf is a minimal webserver. Also has a limited support for webdav.
+.BR
+This manual page documents \fBWeborf\fP's command-line parameters.
+.BR
+\fBWeborf\fP is released under the GNU General Public License version 3.
+
+.SH OPTIONS
+.SS
+.SS Options:
+
+.TP
+.B \-b, \-\-basedir
+Must be followed by a valid directory. Weborf will use this directory as root directory, and won't send files located in parent dirs. But it is still possible for server\-side scripts to read contents located anywhere on the filesystem. Links are also a workaround to exit from the base directory.
+Defaults to /srv/www.
+
+.TP
+.B \-a, \-\-auth
+Must be followed by a unix socket listened by a program who will handle authentication. See the website for more details.
+
+.TP
+.B \-c, \-\-cgi
+Must be followed by a list (separated with commas and without spaces) of CGI formats and the binary to execute that format.
+For example: .php,/usr/bin/php-cgi,.sh,/usr/bin/sh-cgi
+In /etc/weborf.conf there is a 'cgi' directive, corresponding to this option. It is used when launching weborf as SystemV daemon.
+
+.TP
+.B \-C, \-\-cache
+Must be followed by a directory that will be used to store cached files.
+To flush the cache (empty that directory) you must delete the files in the directory.
+
+.TP
+.B \-T, \-\-inetd
+Must be specified when using weborf with inetd or xinetd.
+It will be still necessary to specify the used port, to pass the correct value to the CGI scripts.
+The \-u directive will be ignored.
+Daemon \-d mode should not be used.
+
+.TP
+.B \-t, \-\-tar
+If used, instead of sending directory listing when requesting a directory, weborf will send a tar.gz file with the content of that directory.
+It is used mainly to share files and preserving their permissions.
+It cannot be used together with https.
+
+.TP
+.B \-Y, \-\-yesexec
+When used, weborf will enable CGI.
+
+.TP
+.B \-m, \-\-mime
+When used, weborf will send the Content-Type header. It is strongly advised to use it when using weborf as production server because some browsers rely on this field.
+This value will not affect the CGI pages.
+
+.TP
+.B \-i, \-\-ip
+Must be followed by a valid IP address (v6 or v4, depending on how weborf was compiled. Run weborf \-h to know it), and weborf will accept only connections directed to that specific IP.
+If the IP address provided isn't used by a network device on the host, weborf will terminate.
+By default weborf listens to all IP addresses on the local host.
+
+.TP
+.B \-k, \-\-caps
+Shows some compile-time options in a machine-readable format.
+
+.TP
+.B \-p, \-\-port
+Must be followed by a valid port number (between 1 and 65535), and weborf will listen to incoming connection on the specified port.
+If the port is already used weborf will terminate.
+To use low port numbers (less than 1024) it is necessary to execute the process as root.
+Thus it isn't a good idea to run a webserver with root privileges, so it is possible to specify another user.
+
+.TP
+.B \-S, \-\-cert
+Path to the SSL certificate. Enables https. Requires a key to be passed as well.
+
+.TP
+.B \-K, \-\-key
+Path to the SSL key. Enables https. Requires a certificate to be passed as well.
+
+.TP
+.B \-V, \-\-virtual
+Enables weborf to use virtualhosts. The basedir supplied with \-b will be the default one (will be used if the requested host is unknown).
+Every virtualhost must be in the form host[:port]=basedir. The port must be specified if the port used is different than 80. And the basedir must end with a /. To separate many virtualhosts, use a comma, and avoid spaces.
+To make weborf use different virtualhosts on different ports, it will be necessary to launch many weborf's processes. This can now be achieved easily by creating multiple configuration files and using the systemd units like weborf@cfgfile.conf
+
+.TP
+.B \-I, \-\-index
+Must be followed by a list (separated with commas and without spaces) of index files.
+Weborf will try to load an index file following the order they're listed, and if none is found it will list the content of the directory.
+In /etc/weborf.conf there is an 'indexes' directive, corresponding to this option. It is used when launching weborf as SystemV daemon.
+
+.TP
+.B \-u, \-\-uid
+Must be followed by a valid uid, different from 0. Weborf will use this user to do his work, but will bind to the network port with the previous user. This mechanism is meant to let users execute it as root and use port 80, and then let it run without root privileges.
+
+.TP
+.B \-g, \-\-gid
+Must be followed by a valid gid, different from 0. Weborf will use this user to do his work, but will bind to the network port before changing.
+
+.TP
+.B \-d
+Runs weborf as a daemon. It will not terminate when its father process terminates, and it will leave the shell free to receive commands.
+.SS
+
+.SH SCRIPTING
+Weborf is able to send dynamically generated pages using php-cgi (if installed).
+When a filename ends with ".php", weborf will use php to execute this file before sending it to the client. The \-c switch will override the default behavior.
+.BR
+It is also possible to create scripts or binaries in other languages, just read rfc3875 to know how to handle parameters.
+
+.SH RETURN VALUE
+.TP
+.B 0
+Normal termination occurred after a signal, a daemonization or a print version and exit or so on...
+.TP
+.B 1
+Basedir is not a directory
+.TP
+
+.B 2
+Invalid IP address
+.TP
+
+.B 3
+Port already in use
+.TP
+
+.B 4
+Invalid port number
+.TP
+
+.B 5
+Authentication socket doesn't exist or is not a unix socket
+.TP
+
+.B 6
+Too many indexes provided as parameter to \-I or to \-c. Increasing MAXINDEXCOUNT in the file options.h and recompiling can solve the problem. But providing a reasonable amount of index file names would be a better solution.
+.TP
+
+.B 7
+Unable to allocate memory
+.TP
+
+.B 9
+Unable to change UID
+.TP
+
+.B 10
+Error with cache directory
+.TP
+
+
+.B 19
+Invalid parameters on command line
+.SS
+
+.SH "SIGNALS"
+.TP
+.B SIGUSR1
+Prints the internal status of the socket's queue and threads on the standard output
+.SS
+
+.SH "SEE ALSO"
+.BR weborf.conf(5), php (1)
+
+.SH VERSION
+.BR Weborf 0.13
+
+.SH WEB
+.BR https://ltworf.github.io/weborf/
+
+.SH AUTHORS
+.nf
+Salvo "LtWorf" Tomaselli <tiposchi@tiscali.it>
+Salvo Rinaldi <salvin@anche.no>
+.br

@@ -1,0 +1,12 @@
+#!/bin/bash
+. testsuite/functions.sh
+
+run_weborf -b site1 -p 12345
+
+ROBOTS=$(curl -s http://127.0.0.1:12345/robots.txt)
+[[ "$ROBOTS" = $(cat site1/robots.txt) ]]
+
+ROBOTS=$(curl -s http://127.0.0.1:12345/empty)
+[[ "$ROBOTS" = '' ]]
+
+curl -s http://127.0.0.1:12345/cgi.py | grep "import os"

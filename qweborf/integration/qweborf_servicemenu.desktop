@@ -1,0 +1,23 @@
+[Desktop Entry]
+Type=Service
+ServiceTypes=KonqPopupMenu/Plugin
+MimeType=inode/directory;
+Actions=share;
+X-KDE-Priority=TopLevel
+X-KDE-StartupNotify=false
+
+[Desktop Action share]
+Name=Share directory via HTTP…
+Name[it]=Condividi cartella con HTTP…
+Icon=qweborf
+Exec=qweborf %f
+
+[Nemo Action]
+Active=true
+Name=Share directory via HTTP…
+Comment=share local files using the HTTP protocol.
+Exec=qweborf %F
+Icon-Name=qweborf
+Selection=notnone
+Extensions=dir;
+Quote=double

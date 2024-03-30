@@ -1,0 +1,6 @@
+#!/bin/bash
+. testsuite/functions.sh
+
+"$BINNAME" --help
+"$BINNAME" --version
+"$BINNAME" -k
